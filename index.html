@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+	<link rel="stylesheet" href="reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="style.css"> <!-- Resource style -->
+  	
+	<title>Pop Up Box</title>
+</head>
+<body>
+<main>
+	<h1>Add to Box Interaction</h1>
+	<a href="#0" class="add-to-box">Add To box</a>
+</main>
+
+<div class="box-container ">
+	<a href="#0" class="box-trigger">
+		Bet
+	</a>
+
+	<div class="the-box">
+		<div class="wrapper">
+			<header>
+				<h2>Box</h2>
+			</header>
+			
+			<div class="body">
+				<ul>
+					<li class="item">
+                        <div class="item-details">
+                            <h3>Heading 3</h3>
+                            <p>this is a paragraph</p>
+                        </div>
+                    </li>
+				</ul>
+			</div>
+
+			<footer>
+				<a href="#0" class="checkout btn">Play</a>
+			</footer>
+		</div>
+	</div> <!-- .the-box -->
+</div> <!-- box-container -->
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+</script>
+<script src="js/scripts.js"></script> <!-- Resource jQuery -->
+</body>
+</html>

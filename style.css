@@ -1,0 +1,269 @@
+/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+*, *::after, *::before {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 62.5%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    font-size: 1.6rem;
+    font-family: "Source Sans Pro", sans-serif;
+    color: #2b3e51;
+    background-color: #ecf0f1;
+  }
+  
+  a {
+    color: #2c97de;
+    text-decoration: none;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  main {
+    text-align: center;
+    padding: 2em 5%;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    padding: 3em 0 .8em;
+  }
+  @media only screen and (min-width: 768px) {
+    h1 {
+      font-size: 3.2rem;
+    }
+  }
+
+  
+  /* the button */
+  .add-to-box {
+    display: inline-block;
+    padding: 1.2em 1.8em;
+    background: #2c97de;
+    border-radius: 50em;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: .1em;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    -webkit-transition: all .2s;
+    transition: all .2s;
+  }
+  .add-to-box:hover {
+    background: #42a2e1;
+  }
+  .add-to-box:active {
+    -webkit-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  
+  /* -------------------------------- 
+
+Main Components 
+
+-------------------------------- */
+
+.box-container::before {
+    /* dark bg layer visible when the cart is open */
+  content: '';
+  position: fixed;
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  /* op & visibility */
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity .4s, visibility .4s;
+  transition: opacity .4s, visibility .4s;
+}
+/* trigger using js */
+.open.box-container::before{
+    opacity: 1;
+    visibility: visible;
+}
+
+ 
+  /* the box */
+  .the-box {
+    z-index: 2;
+    width: 71%;
+    max-width: 447px;
+    height: 400px;
+    max-height: 90%;
+    pointer-events: none;
+    
+  }
+
+  .box-trigger,
+  .the-box {
+    position: fixed;
+    bottom: 20px;
+    right: 5%;
+    -webkit-transition: -webkit-transform .2s;
+    transition: -webkit-transform .2s;
+    transition: transform .2s;
+    transition: transform .2s, -webkit-transform .2s;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  .box-trigger {
+    z-index: 3;
+    height: 72px;
+    width: 72px;
+    text-indent: 100%;
+    color: transparent;
+    white-space: nowrap;
+}
+
+.box-trigger::after, .box-trigger::before {
+  /* used to create the cart/'X' icon */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  height: 100%;
+  width: 100%;
+  background: url(img/close.svg) no-repeat 0 0;
+  -webkit-transition: opacity .2s, -webkit-transform .2s;
+  transition: opacity .2s, -webkit-transform .2s;
+  transition: opacity .2s, transform .2s;
+  transition: opacity .2s, transform .2s, -webkit-transform .2s;
+}
+.box-trigger::after {
+  /* 'X' icon */
+  background-position: -72px 0;
+  opacity: 0;
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+      -ms-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+          transform: translateX(-50%) translateY(-50%) rotate(90deg);
+}
+.open .box-trigger::before {
+  opacity: 0;
+}
+.open .box-trigger::after {
+  opacity: 1;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+}
+  .wrapper {
+    height: 100%;
+    width: 100%;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+.the-box .wrapper {
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    z-index: 2;
+    overflow: hidden;
+    height: 72px;
+    width: 72px;
+    border-radius: 6px;
+    -webkit-transition: height .4s .1s, width .4s .1s, box-shadow .3s;
+    transition: height .4s .1s, width .4s .1s, box-shadow .3s;
+    -webkit-transition-timing-function: cubic-bezier(0.67, 0.17, 0.32, 0.95);
+    transition-timing-function: cubic-bezier(0.67, 0.17, 0.32, 0.95);
+    background: #ffffff;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.17);
+    pointer-events: auto;
+}
+.open .the-box .wrapper {
+    height: 100%;
+    width: 100%;
+}
+.the-box header {
+    top: 0;
+    border-radius: 6px 6px 0 0;
+    padding: 0 1.4em;
+    height: 40px;
+    line-height: 40px;
+    background-color: #ffffff;
+    -webkit-transition: opacity .2s 0s;
+    transition: opacity .2s 0s;
+    border-bottom: 1px solid #e6e6e6;
+}
+.the-box header, .the-box footer {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    width: 100%;
+}
+.the-box h2 {
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+}
+.the-box header::after {
+    clear: both;
+    content: "";
+    display: block;
+}
+.the-box .body {
+    position: relative;
+    z-index: 1;
+    height: calc(100% - 40px);
+    padding: 20px 0 10px;
+    margin: 40px 0 10px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+}
+.the-box .body ul{
+    overflow: hidden;
+    padding: 0 1.4em;
+    position: relative;
+    padding-bottom: 90px;
+}  
+
+.the-box footer {
+    bottom: 0;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+}
+/* use .box-open */
+.the-box .checkout {
+    color: #ffffff;
+    -webkit-transition: color .2s .3s;
+    transition: color .2s .3s;
+}
+.the-box .checkout {
+    display: block;
+    height: 72px;
+    line-height: 72px;
+    margin-right: 72px;
+    background: #2c97de;
+    /* color: rgba(255, 255, 255, 0); */
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    -webkit-transition: all .2s 0s;
+    transition: all .2s 0s;
+}
